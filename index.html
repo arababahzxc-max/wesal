@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>وصال WESAL Ai</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F4F2FF;--card:#fff;--ink:#1B2150;--mute:#5E6490;--line:#DAD7F2;--pri:#2B3A8C;--on:#fff;--aqua:#17A99B;--sun:#FFC24B;--rose:#F0587A;--soft:#E8E5FF;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12142E;--card:#1C2046;--ink:#EEF0FF;--mute:#A4A9D6;--line:#323869;--pri:#8E9BFF;--on:#12142E;--soft:#262B5C;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#12142E;--card:#1C2046;--ink:#EEF0FF;--mute:#A4A9D6;--line:#323869;--pri:#8E9BFF;--on:#12142E;--soft:#262B5C;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Cairo,Tahoma,sans-serif;line-height:1.7;min-height:100vh}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+.screen{display:none;max-width:560px;margin:0 auto;padding:20px 18px 96px}
+.screen.on{display:block}
+h1,h2,h3{margin:0;line-height:1.3}
+.btn{background:var(--pri);color:var(--on);border:0;border-radius:14px;padding:12px 22px;font-weight:800;font-size:1rem}
+.btn.alt{background:var(--soft);color:var(--ink)}
+.btn.full{width:100%}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:12px}
+/* splash */
+#splash{text-align:center;min-height:100vh;padding-top:12vh;position:relative}
+#splash.on{display:block}
+.rings{width:200px;height:130px;margin:0 auto 10px}
+.rings circle{fill:none;stroke-width:9}
+.rings .a{stroke:var(--pri)}.rings .b{stroke:var(--rose)}.rings .c{stroke:var(--aqua)}
+.rings .a,.rings .b,.rings .c{stroke-dasharray:260;stroke-dashoffset:260;animation:draw 1.6s ease forwards}
+.rings .b{animation-delay:.3s}.rings .c{animation-delay:.6s}
+@keyframes draw{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.rings *{animation:none!important;stroke-dashoffset:0!important}}
+#splash h1{font-size:3.4rem;font-weight:800;letter-spacing:0}
+#splash .en{font-size:1.1rem;color:var(--mute);margin:0 0 18px;direction:ltr}
+#splash p{max-width:360px;margin:0 auto 28px;color:var(--mute);font-size:1.1rem}
+/* forms */
+label{display:block;font-weight:600;margin:12px 0 4px}
+input,select{width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--card)}
+.row{display:grid;grid-template-columns:1.4fr 1fr 1.2fr auto;gap:8px;align-items:center;margin-bottom:8px}
+.row .x{background:none;border:0;color:var(--rose);font-size:1.3rem}
+@media(max-width:430px){.row{grid-template-columns:1fr 1fr;}.row .x{justify-self:end}}
+/* header */
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.pts{background:var(--sun);color:#3A2A00;font-weight:800;border-radius:99px;padding:3px 14px}
+.hello{margin-bottom:14px}.hello p{margin:0;color:var(--mute)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:12px}
+.chip{flex:none;border:1.5px solid var(--line);background:var(--card);border-radius:99px;padding:5px 16px}
+.chip.on{background:var(--pri);color:var(--on);border-color:var(--pri)}
+.ch{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:right;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;margin-bottom:10px}
+.ch .ic{font-size:1.9rem;width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:var(--soft);flex:none}
+.ch h3{font-size:1.05rem}.ch small{color:var(--mute)}
+.ch.done{opacity:.65}
+.tag{display:inline-block;font-size:.8rem;border-radius:99px;padding:0 10px;background:var(--soft);margin-inline-start:6px}
+/* detail */
+.back{background:none;border:0;color:var(--pri);font-weight:800;padding:0;margin-bottom:10px}
+.steps{padding-inline-start:22px}.steps li{margin-bottom:6px}
+.big{font-size:3rem;text-align:center}
+/* agent */
+.chat{display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
+.msg{max-width:92%;border-radius:18px;padding:10px 14px}
+.msg.ai{background:var(--card);border:1px solid var(--line);border-start-start-radius:4px}
+.msg.me{background:var(--pri);color:var(--on);align-self:flex-start;border-start-end-radius:4px}
+.sug{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)}
+.sug b{display:block}.sug small{color:var(--mute)}
+.sug button{padding:6px 14px;border-radius:10px;border:0;background:var(--aqua);color:#00302B;font-weight:800;flex:none}
+.ask{display:flex;gap:8px}
+/* nav */
+nav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--line);display:none;justify-content:center;gap:6px;padding:6px 10px calc(6px + env(safe-area-inset-bottom,0px))}
+nav.on{display:flex}
+nav button{flex:1;max-width:170px;border:0;background:none;border-radius:12px;padding:6px;font-weight:600;color:var(--mute)}
+nav button.on{background:var(--soft);color:var(--ink)}
+nav span{display:block;font-size:1.3rem}
+.bar{height:12px;border-radius:9px;background:var(--soft);overflow:hidden}.bar i{display:block;height:100%;background:var(--aqua)}
+.mem{display:flex;gap:10px;align-items:center;margin-bottom:8px}
+.av{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-size:1.4rem;background:var(--soft)}
+.row2{display:flex;gap:8px;align-items:center;margin:8px 0}.row2 select{width:auto}.mt{margin:8px 0 0;color:var(--mute)}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}.grid3 .card{margin:0}.k{text-align:center;padding:12px 6px}.k b{display:block;font-size:1.6rem}.k small{color:var(--mute)}.bars{display:flex;gap:8px;align-items:flex-end;height:110px;margin-top:8px}.col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px}.col i{width:100%;max-width:30px;background:var(--aqua);border-radius:8px 8px 3px 3px}.col small{color:var(--mute)}.sk{display:grid;grid-template-columns:96px 1fr 38px;gap:8px;align-items:center;margin-top:8px}.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;margin-top:8px}.bd{text-align:center;background:var(--soft);border-radius:14px;padding:8px 4px}.bd span{font-size:1.7rem;display:block}.bd small{font-size:.78rem}.bd.off{opacity:.35;filter:grayscale(1)}
+.code{font-family:monospace;font-size:2.2rem;font-weight:800;letter-spacing:.12em;direction:ltr;text-align:center;background:var(--soft);border-radius:16px;padding:14px;margin:14px 0}.pm{display:block;width:100%;text-align:right;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:8px;font-weight:600}#toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 18px;border-radius:99px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:9;max-width:90%;text-align:center}#toast.on{opacity:1}
+.qr{display:inline-block;background:#fff;padding:12px;border-radius:16px;line-height:0;margin:6px 0 10px}.qr img,.qr canvas{max-width:100%;height:auto}
+</style>
+</head>
+<body>
+
+<section class="screen on" id="splash">
+  <svg class="rings" viewBox="0 0 200 130" aria-hidden="true"><circle class="a" cx="65" cy="65" r="40"/><circle class="b" cx="135" cy="65" r="40"/><circle class="c" cx="100" cy="65" r="40"/></svg>
+  <h1>وصال</h1>
+  <div class="en">WESAL Ai</div>
+  <p>تحديات بسيطة تقرّب أفراد الأسرة من بعضهم، وتجعل التقنية جسرًا بينهم بدل أن تكون جدارًا.</p>
+  <button class="btn" id="enter">ابدأ رحلة أسرتك</button><div style="height:10px"></div><button class="btn alt" id="have">لدي كود الأسرة</button><div style="height:10px"></div><button class="btn" id="demo" style="background:var(--aqua);color:#00302B">🧪 تجربة سريعة للجنة التحكيم</button>
+</section>
+
+<section class="screen" id="reg">
+  <h2>سجّلوا أسرتكم</h2>
+  <p style="color:var(--mute)">كل ما نحتاجه اسم الأسرة وأفرادها، لنقترح تحديات تناسب أعمارهم.</p>
+  <label for="fam">اسم الأسرة</label>
+  <input id="fam" placeholder="مثال: أسرة الراشد">
+  <label>أفراد الأسرة</label>
+  <div id="members"></div>
+  <button class="btn alt" id="addm">إضافة فرد</button>
+  <div style="height:18px"></div>
+  <button class="btn full" id="save">احفظوا وابدؤوا</button>
+</section>
+
+<section class="screen" id="login">
+  <button class="back" id="lbk">‹ رجوع</button>
+  <h2>الدخول بكود الأسرة</h2>
+  <p class="mt">أدخلوا الكود الذي ظهر عند تسجيل الأسرة.</p>
+  <div id="l1"><label for="code">كود الأسرة</label><input id="code" dir="ltr" placeholder="WS-XXXXXX" autocapitalize="characters" autocomplete="off"><p id="lerr" class="mt" style="color:var(--rose)"></p><button class="btn full" id="lgo">متابعة</button></div>
+  <div id="l2" style="display:none"><h3 id="lf"></h3><p class="mt">من أنتم من أفراد الأسرة؟</p><div id="lm"></div></div>
+</section>
+
+<section class="screen" id="codes" style="text-align:center">
+  <div class="big" style="margin-top:8vh">🔑</div><h2>كود أسرتكم جاهز</h2>
+  <p class="mt">شاركوه مع أفراد الأسرة ليدخلوا به من أي جهاز.</p>
+  <div class="code" id="cv"></div><div class="qr" id="qrc"></div><p class="mt">امسحوا الرمز بالجوال للدخول مباشرة، وسيُكتب الكود تلقائيًا في شاشة الدخول.</p><p class="mt" id="cn"></p>
+  <button class="btn alt" id="cc">نسخ الكود</button> <button class="btn alt" id="ccl">نسخ رابط الدعوة</button> <button class="btn" id="cgo">ادخلوا الآن</button>
+</section>
+
+<div id="toast" role="status"></div>
+
+<section class="screen" id="home">
+  <div class="top"><h2 id="fname"></h2><span class="pts" id="pts">0 نقطة</span></div><div class="mt" id="who" style="margin:-6px 0 12px"></div>
+  <div class="hello card"><b>تقدّم الأسرة</b><div class="bar" style="margin-top:8px"><i id="prog"></i></div><p id="progt"></p></div>
+  <div class="chips" id="cats"></div>
+  <div id="list"></div>
+</section>
+
+<section class="screen" id="detail"></section>
+
+<section class="screen" id="agent">
+  <h2>وصّال، مساعدكم الذكي</h2>
+  <p style="color:var(--mute)">اخبروني ما تحتاجه أسرتكم، وسأرشّح لكم أنسب التحديات.</p>
+  <div class="chat" id="chat"></div>
+  <div class="chips" id="need"></div>
+  <div class="ask"><input id="q" placeholder="اكتبوا ما يشغلكم…" aria-label="رسالة للمساعد"><button class="btn" id="send">إرسال</button></div>
+</section>
+
+<section class="screen" id="me">
+  <h2>تقدّم أسرتنا</h2>
+  <div id="stats"></div>
+  <div id="fm"></div>
+  <button class="btn alt full" id="out">خروج من هذا الجهاز</button><div style="height:8px"></div><button class="btn alt full" id="reset">تسجيل أسرة جديدة</button>
+</section>
+
+<nav id="nav">
+  <button data-go="home"><span>🏡</span>التحديات</button>
+  <button data-go="agent"><span>✨</span>المساعد</button>
+  <button data-go="me"><span>📈</span>تقدّمنا</button>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+var C=[
+{id:1,i:"🍽️",t:"عشاء بلا شاشات",cat:"تواصل",m:30,p:20,tags:["قرب","شاشات","وقت"],d:"وجبة واحدة تُترك فيها الهواتف في سلة، ويتبادل الجميع الحديث.",s:["ضعوا الهواتف في سلة قبل الجلوس.","يطرح كل فرد سؤالًا: ما أجمل شيء حدث لك اليوم؟","بعد العشاء، افتحوا السلة معًا واحكوا كيف كان الشعور."]},
+{id:2,i:"💌",t:"رسائل امتنان",cat:"عاطفي",m:15,p:25,tags:["شعور","قرب","شجار","صغار"],d:"يكتب كل فرد رسالة قصيرة يشكر فيها فردًا آخر على موقف محدد.",s:["اسحبوا ورقة بأسماء الأفراد سرًّا.","اكتبوا جملتين: ماذا فعل لي ولماذا أقدّره؟","اقرؤوها بصوت عالٍ أو سجّلوها صوتيًا."]},
+{id:3,i:"🔄",t:"تبادل الأدوار",cat:"تعاطف",m:20,p:30,tags:["شجار","شعور","كبار"],d:"يمثّل كل فرد دور فرد آخر في موقف يومي ليفهم وجهة نظره.",s:["اختاروا موقفًا بسيطًا من الأسبوع.","بدّلوا الأدوار وتحدثوا بلسان الآخر دقيقتين.","ثم شاركوا: ماذا تعلّمتم عن مشاعر بعضكم؟"]},
+{id:3.5,i:"📦",t:"صندوق المشاعر",cat:"عاطفي",m:10,p:20,tags:["شعور","صغار","شجار"],d:"صندوق صغير يضع فيه كل فرد بطاقة تعبّر عن شعوره، ونتحدث عنها بهدوء.",s:["جهّزوا صندوقًا وبطاقات بوجوه المشاعر.","يضع كل فرد بطاقة بدون كلام.","نفتح البطاقات ونسأل: كيف نساعدك؟"]},
+{id:4,i:"📖",t:"ساعة قصة",cat:"تواصل",m:40,p:25,tags:["صغار","قرب","وقت"],d:"قصة تُروى بالتناوب، وكل فرد يضيف جملة جديدة.",s:["ابدؤوا بجملة: كان يا ما كان في بيت يشبه بيتنا…","يضيف كل فرد جملة بالدور.","ارسموا مشهدًا واحدًا من القصة."]},
+{id:5,i:"🧩",t:"مشروع أسري صغير",cat:"تعاون",m:60,p:35,tags:["قرب","كبار","تعاون"],d:"تنفيذ شيء واحد معًا: زراعة نبتة، تركيب أحجية، أو ترتيب ركن في البيت.",s:["اختاروا المشروع بالتصويت.","وزّعوا المهام حسب قدرات كل فرد.","التقطوا صورة قبل وبعد، واحتفلوا."]},
+{id:6,i:"🚶",t:"مشية العائلة",cat:"نشاط",m:30,p:20,tags:["شاشات","وقت","كبار","قرب"],d:"مشي هادئ في الحي أو الشاطئ مع لعبة ملاحظة.",s:["اتركوا الهواتف في البيت.","لعبة: من يجد أكثر ثلاثة أشياء جميلة؟","اختموا بمشروب مفضّل للجميع."]},
+{id:7,i:"📹",t:"تقنية للخير: اتصال مرئي مع الجدّ",cat:"تقنية إيجابية",m:25,p:30,tags:["تقنية","قرب","وقت","كبار"],d:"استخدموا التقنية لتقريب قريب بعيد، مع سؤال عن ذكرياته.",s:["حدّدوا موعدًا مع جدّ أو قريب بعيد.","جهّزوا ثلاثة أسئلة عن أجمل ذكرى له.","سجّلوا الإجابات لتكون أرشيف الأسرة."]},
+{id:8,i:"🎬",t:"فيلم عائلي بنقاش",cat:"تقنية إيجابية",m:90,p:25,tags:["تقنية","شعور","وقت"],d:"شاهدوا فيلمًا قصيرًا معًا، ثم ناقشوا القيم التي ظهرت فيه.",s:["اختاروا فيلمًا يناسب أصغر فرد.","أوقفوه عند لحظة مؤثرة واسألوا: ماذا كنتم ستفعلون؟","بعد النهاية، كل فرد يذكر قيمة أعجبته."]}
+];
+var NEEDS=[["قرب أكثر","قرب"],["نتشاجر كثيرًا","شجار"],["وقتنا ضيق","وقت"],["أطفالنا صغار","صغار"],["نريد تقنية مفيدة","تقنية"],["الشاشات تسرق وقتنا","شاشات"]];
+var S={fam:"",mem:[],done:[],cat:"الكل"};
+var $=function(i){return document.getElementById(i)};
+function load(){try{var v=localStorage.getItem("wesal");if(v)S=JSON.parse(v)}catch(e){}}
+function lsSave(){try{localStorage.setItem("wesal",JSON.stringify(S))}catch(e){}}
+function save(){lsSave();push()}
+var DB=null,unsub=null;
+try{if(window.claude&&claude.use)claude.use("db").then(function(d){DB=d;if(S.code)watch()}).catch(function(){})}catch(e){}
+function s1(v,n){return String(v==null?"":v).replace(/[<>&"'`]/g,"").slice(0,n||60)}
+function cl(d){
+  d=d||{};var n=function(v,a,b){v=+v;return isFinite(v)?Math.min(b,Math.max(a,v)):a},A=function(x){return Array.isArray(x)?x:[]};
+  return{fam:s1(d.fam,40),
+    mem:A(d.mem).slice(0,12).map(function(m){m=m||{};return{n:s1(m.n,30),a:n(m.a,0,120),r:ROLES.indexOf(m.r)>-1?m.r:"ابن"}}).filter(function(m){return m.n}),
+    done:A(d.done).map(Number).filter(isFinite).slice(0,200),
+    log:A(d.log).slice(-500).map(function(x){x=x||{};return{id:n(x.id,0,1e6),ts:n(x.ts,0,9e15),r:n(x.r,1,3),u:s1(x.u,30)}}),
+    goal:n(d.goal||3,1,7),
+    cu:A(d.cu).slice(0,30).map(function(c){c=c||{};return{id:n(c.id,100,1e6),i:"✨",t:s1(c.t,60),cat:"من وصّال",m:n(c.m,5,240),p:30,tags:[],d:s1(c.d,200),s:A(c.s).slice(0,5).map(function(x){return s1(x,160)})}}).filter(function(c){return c.t&&c.s.length})};
+}
+function normCode(v){v=String(v).toUpperCase().replace(/[^A-Z0-9]/g,"");if(v.length>6&&v.indexOf("WS")===0)v=v.slice(2);return"WS-"+v}
+function makeCode(cb){
+  var A="ABCDEFGHJKLMNPQRSTUVWXYZ23456789",r=new Uint32Array(6),c="WS-";crypto.getRandomValues(r);for(var i=0;i<6;i++)c+=A.charAt(r[i]%32);
+  if(!DB){cb(c);return}
+  var done=false,tm=setTimeout(function(){go(function(){cb(c)})},3000),go=function(f){if(!done){done=true;clearTimeout(tm);f()}};
+  DB.doc("families/"+c).get().then(function(s){go(function(){s.exists?makeCode(cb):cb(c)})}).catch(function(){go(function(){cb(c)})});
+}
+function ref(){return DB&&S.code?DB.doc("families/"+S.code):null}
+function push(){var r=ref();if(!r)return;r.set({fam:S.fam,mem:S.mem,done:S.done,log:S.log||[],goal:S.goal||3,cu:S.cu||[]}).catch(function(){toast("تعذّرت المزامنة الآن")})}
+function syncC(){for(var i=C.length-1;i>=0;i--)if(C[i].id>=100)C.splice(i,1);(S.cu||[]).forEach(function(c){C.push(c)})}
+function watch(){
+  var r=ref();if(!r||unsub||!S.me)return;
+  unsub=r.onSnapshot(function(s){
+    if(!s.exists)return;var d=cl(s.data());
+    S.fam=d.fam;S.mem=d.mem;S.done=d.done;S.log=d.log;S.goal=d.goal;S.cu=d.cu;syncC();lsSave();
+    var on=document.querySelector(".screen.on");if(on&&on.id==="home")renderHome();if(on&&on.id==="me")renderMe();
+  },function(){});
+}
+function copy(t){try{navigator.clipboard.writeText(t).then(function(){toast("تم نسخ الكود")}).catch(function(){toast(t)})}catch(e){toast(t)}}
+function toast(m){var t=$("toast");t.textContent=m;t.classList.add("on");clearTimeout(toast.h);toast.h=setTimeout(function(){t.classList.remove("on")},2800)}
+function show(id){
+  document.querySelectorAll(".screen").forEach(function(s){s.classList.remove("on")});
+  $(id).classList.add("on");window.scrollTo(0,0);
+  var n=["home","agent","me"].indexOf(id)>-1||id==="detail";
+  $("nav").classList.toggle("on",n);
+  document.querySelectorAll("nav button").forEach(function(b){b.classList.toggle("on",b.dataset.go===id)});
+  if(id==="home")renderHome();if(id==="me")renderMe();
+}
+function pts(){return S.done.reduce(function(a,id){var c=C.find(function(x){return x.id==id});return a+(c?c.p:0)},0)}
+/* register */
+var ROLES=["أب","أم","ابن","ابنة","جدّ","جدّة"];
+function memRow(m){
+  var r=document.createElement("div");r.className="row";
+  r.innerHTML='<input placeholder="الاسم" aria-label="الاسم" value="'+(m.n||"")+'"><input type="number" min="1" max="99" placeholder="العمر" aria-label="العمر" value="'+(m.a||"")+'"><select aria-label="الدور">'+ROLES.map(function(x){return"<option"+(x===m.r?" selected":"")+">"+x+"</option>"}).join("")+'</select><button class="x" aria-label="حذف" type="button">✕</button>';
+  r.querySelector(".x").onclick=function(){r.remove()};
+  $("members").appendChild(r);
+}
+function readMem(){
+  return Array.prototype.map.call($("members").children,function(r){var i=r.querySelectorAll("input,select");return{n:s1(i[0].value.trim(),30),a:+i[1].value||0,r:i[2].value}}).filter(function(m){return m.n});
+}
+$("enter").onclick=function(){if(S.fam&&S.mem.length){if(!S.code){S.me=S.me||S.mem[0].n;makeCode(function(c){S.code=c;save();watch();showCode()})}else show("home")}else show("reg")};
+$("have").onclick=function(){$("l1").style.display="";$("l2").style.display="none";$("lerr").textContent="";show("login")};
+function startDemo(){
+  var D=864e5,n=Date.now();
+  if(unsub){unsub();unsub=null}
+  S={demo:true,me:"أحمد",fam:"أسرة المثال",cat:"الكل",goal:3,cu:[],code:"",
+    mem:[{n:"أحمد",a:40,r:"أب"},{n:"سارة",a:37,r:"أم"},{n:"ليان",a:9,r:"ابنة"},{n:"يوسف",a:14,r:"ابن"}],
+    done:[1,2,4,6],
+    log:[{id:6,ts:n-3*D,r:3,u:"سارة"},{id:4,ts:n-2*D,r:3,u:"ليان"},{id:2,ts:n-D,r:2,u:"يوسف"},{id:1,ts:n-D*0.1,r:3,u:"أحمد"}]};
+  syncC();lsSave();show("home");
+}
+$("demo").onclick=startDemo;
+$("lbk").onclick=function(){show("splash")};
+$("code").oninput=function(){$("lerr").textContent=""};
+$("lgo").onclick=function(){
+  if(!DB){$("lerr").textContent="المزامنة غير متاحة الآن. افتحوا الرابط وأنتم مسجّلون الدخول في Claude.";return}
+  var c=normCode($("code").value);$("lgo").disabled=true;
+  DB.doc("families/"+c).get().then(function(s){
+    if(!s.exists){$("lerr").textContent="لم نجد أسرة بهذا الكود. تأكدوا منه، أو من أن لديكم صلاحية المشاركة.";return}
+    var d=cl(s.data());S.code=c;S.me="";S.fam=d.fam;S.mem=d.mem;S.done=d.done;S.log=d.log;S.goal=d.goal;S.cu=d.cu;syncC();lsSave();pick();
+  }).catch(function(){$("lerr").textContent="تعذّر الاتصال الآن، حاولوا بعد قليل."}).then(function(){$("lgo").disabled=false});
+};
+function pick(){
+  $("l1").style.display="none";$("l2").style.display="";$("lf").textContent=S.fam;$("lm").innerHTML="";
+  S.mem.forEach(function(m){var b=document.createElement("button");b.className="pm";b.textContent=m.n+" · "+m.r;b.onclick=function(){S.me=m.n;lsSave();watch();show("home")};$("lm").appendChild(b)});
+}
+function showCode(){$("cv").textContent=S.code;qr($("qrc"),S.code);$("cn").textContent=DB?"":"المزامنة غير متاحة الآن؛ سيعمل الكود بين الأجهزة عند توفّرها.";show("codes")}
+var PAGE="https://claude.ai/artifact/9DTnfkid8uxXFTzBiyjeFR";
+function qr(el,code){el.innerHTML="";var link=PAGE+"#"+code;try{new QRCode(el,{text:link,width:180,height:180,colorDark:"#1B2150",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M})}catch(e){el.style.lineHeight="1.6";el.style.direction="ltr";el.textContent=link}}
+$("cc").onclick=function(){copy(S.code)};
+$("ccl").onclick=function(){copy(PAGE+"#"+S.code)};
+$("cgo").onclick=function(){show("home")};
+$("out").onclick=function(){if(unsub){unsub();unsub=null}S={fam:"",mem:[],done:[],cat:"الكل"};syncC();lsSave();show("splash")};
+$("addm").onclick=function(){memRow({})};
+$("save").onclick=function(){
+  var f=$("fam").value.trim(),m=readMem();
+  if(!f||m.length<2){toast("اكتبوا اسم الأسرة وأضيفوا فردين على الأقل.");return}
+  S.fam=s1(f,40);S.mem=m;S.me=m[0].n;S.done=[];S.log=[];makeCode(function(c){S.code=c;save();watch();showCode()});
+};
+/* home */
+function renderHome(){
+  $("fname").textContent=S.fam;$("who").textContent=(S.me?"مرحبًا "+S.me+" · ":"")+(S.demo?"🧪 وضع تجربة: بيانات تجريبية على جهازك فقط":S.code&&DB?"🔗 متزامنة بكود الأسرة":"📴 على هذا الجهاز فقط");$("pts").textContent=pts()+" نقطة";
+  var pc=Math.round(S.done.length/C.length*100);$("prog").style.width=pc+"%";
+  $("progt").textContent="أنجزتم "+S.done.length+" من "+C.length+" تحديات";
+  var cats=["الكل"].concat(C.map(function(c){return c.cat}).filter(function(v,i,a){return a.indexOf(v)===i}));
+  $("cats").innerHTML="";
+  cats.forEach(function(c){var b=document.createElement("button");b.className="chip"+(c===S.cat?" on":"");b.textContent=c;b.onclick=function(){S.cat=c;renderHome()};$("cats").appendChild(b)});
+  $("list").innerHTML="";
+  C.filter(function(c){return S.cat==="الكل"||c.cat===S.cat}).forEach(function(c){
+    var b=document.createElement("button");b.className="ch"+(S.done.indexOf(c.id)>-1?" done":"");
+    b.innerHTML='<div class="ic">'+c.i+'</div><div><h3>'+c.t+(S.done.indexOf(c.id)>-1?" ✓":"")+'</h3><small>'+c.d+'</small><div><span class="tag">'+c.cat+'</span><span class="tag">'+c.m+' دقيقة</span><span class="tag">'+c.p+' نقطة</span></div></div>';
+    b.onclick=function(){open_(c.id)};$("list").appendChild(b);
+  });
+}
+function open_(id){
+  var c=C.find(function(x){return x.id==id}),d=S.done.indexOf(id)>-1;
+  $("detail").innerHTML='<button class="back" id="bk">‹ رجوع</button><div class="big">'+c.i+'</div><h2 style="text-align:center;margin-bottom:6px">'+c.t+'</h2><p style="text-align:center;color:var(--mute)">'+c.d+'</p><div class="card"><b>خطوات التحدي</b><ol class="steps">'+c.s.map(function(x){return"<li>"+x+"</li>"}).join("")+'</ol></div><div class="card"><b>من يشارك؟</b><p style="margin:4px 0 0">'+S.mem.map(function(m){return m.n}).join("، ")+'</p></div><div class="card"><b>كيف كان شعوركم بعد التحدي؟</b><div class="chips" id="rt" style="margin:8px 0 0"><button class="chip" data-v="3">😊 قريبون أكثر</button><button class="chip" data-v="2">😐 عادي</button><button class="chip" data-v="1">😕 كان صعبًا</button></div></div><button class="btn full" id="fin">'+(d?"تم إنجازه، أعيدوه متى شئتم":"أنجزنا التحدي (+"+c.p+" نقطة)")+'</button>';
+  show("detail");$("nav").classList.add("on");
+  $("bk").onclick=function(){show("home")};
+  var rv=0;document.querySelectorAll("#rt .chip").forEach(function(b){b.onclick=function(){rv=+b.dataset.v;document.querySelectorAll("#rt .chip").forEach(function(x){x.classList.toggle("on",x===b)})}});
+  $("fin").onclick=function(){if(!d&&!rv){toast("اختاروا كيف كان شعوركم أولًا.");return}if(!d)S.done.push(id);if(rv){S.log=S.log||[];S.log.push({id:id,ts:Date.now(),r:rv,u:S.me||""})}save();show("home")};
+}
+/* agent */
+function add(cls,html){var m=document.createElement("div");m.className="msg "+cls;m.innerHTML=html;$("chat").appendChild(m);m.scrollIntoView({block:"nearest"});return m}
+function localRec(keys,txt){
+  var kids=S.mem.some(function(m){return m.a&&m.a<=9}),old=S.mem.some(function(m){return m.a>=13});
+  if(kids)keys.push("صغار");if(old)keys.push("كبار");
+  var sc=C.map(function(c){var s=c.tags.filter(function(t){return keys.indexOf(t)>-1}).length*2;if(S.done.indexOf(c.id)>-1)s-=3;return{c:c,s:s}}).sort(function(a,b){return b.s-a.s}).slice(0,3);
+  var h=txt+"<br>بناءً على أعمار أفراد "+(S.fam||"أسرتكم")+"، هذه أنسب ثلاثة تحديات:";
+  sc.forEach(function(x){h+='<div class="sug"><div><b>'+x.c.i+" "+x.c.t+'</b><small>'+x.c.m+" دقيقة · "+x.c.cat+'</small></div><button data-id="'+x.c.id+'">اختيار</button></div>'});
+  var m=add("ai","…");setTimeout(function(){m.innerHTML=h;m.querySelectorAll("button").forEach(function(b){b.onclick=function(){open_(+b.dataset.id)}})},550);
+}
+var SM=null,busy=false;
+try{if(window.claude&&claude.use)claude.use("sample").then(function(s){SM=s}).catch(function(){})}catch(e){}
+function recommend(keys,txt,ut){
+  if(!SM||!ut||busy)return localRec(keys,txt);
+  busy=true;var m=add("ai","وصّال يفكّر…");
+  var cat=C.map(function(c){return{id:c.id,t:c.t,cat:c.cat,min:c.m}});
+  var p="أنت «وصّال»، مساعد ذكي دافئ يساعد الأسر العربية على التقارب العاطفي والاجتماعي عبر تحديات بسيطة وتقنية إيجابية.\nالأسرة: "+S.fam+"، الأفراد: "+JSON.stringify(S.mem)+".\nتحديات منجزة (ids): "+JSON.stringify(S.done)+".\nالكتالوج: "+JSON.stringify(cat)+".\nكلام الأسرة: "+ut+"\nأجب بـ JSON فقط بلا أي نص آخر: {\"reply\":\"ردّ عربي دافئ من جملتين إلى ثلاث يخاطب الأسرة ويذكر أسماء الأفراد عند الفائدة\",\"picks\":[حتى ثلاثة ids من الكتالوج الأنسب],\"custom\":null أو {\"t\":\"عنوان\",\"d\":\"وصف قصير\",\"m\":20,\"s\":[\"خطوة1\",\"خطوة2\",\"خطوة3\"]} تحدٍّ جديد مخصّص لحالتهم}. لا تقدّم نصائح علاجية؛ وإن ذكروا عنفًا أو أذى فانصحهم بمختص.";
+  SM.json(p).then(function(r){
+    m.textContent=String(r.reply||"");
+    var add1=function(ic,t,sub,fn){var d=document.createElement("div");d.className="sug";var w=document.createElement("div"),b=document.createElement("b"),s=document.createElement("small"),bt=document.createElement("button");b.textContent=ic+" "+t;s.textContent=sub;w.appendChild(b);w.appendChild(s);bt.textContent="اختيار";bt.onclick=fn;d.appendChild(w);d.appendChild(bt);m.appendChild(d)};
+    (r.picks||[]).slice(0,3).forEach(function(id){var c=C.find(function(x){return x.id==id});if(c)add1(c.i,c.t,c.m+" دقيقة · "+c.cat,function(){open_(c.id)})});
+    var u=r.custom;
+    if(u&&u.t&&u.s&&u.s.length){add1("✨",String(u.t),"تحدٍّ صُمّم لكم · "+(+u.m||20)+" دقيقة",function(){var c={id:100+Date.now()%900000,i:"✨",t:s1(u.t,60),cat:"من وصّال",m:+u.m||20,p:30,tags:[],d:s1(u.d,200),s:u.s.slice(0,5).map(function(x){return s1(x,160)})};S.cu=(S.cu||[]).concat([c]);C.push(c);save();open_(c.id)})}
+    m.scrollIntoView({block:"nearest"});
+  }).catch(function(){m.remove();localRec(keys,txt)}).then(function(){busy=false});
+}
+var KW={"قرب":["قرب","تقارب","بعيد","جفاء"],"شجار":["شجار","خلاف","نتشاجر","عصب","مشكل","صراع"],"وقت":["وقت","مشغول","ضيق","سريع"],"صغار":["صغار","طفل","أطفال","صغير"],"تقنية":["تقنية","تكنولوجيا","فيديو","جهاز"],"شاشات":["شاشة","شاشات","جوال","هاتف","موبايل","ألعاب"],"شعور":["شعور","مشاعر","حزن","غضب","حب","امتنان"]};
+function ask(t){
+  if(!t.trim())return;add("me",t.replace(/</g,"&lt;"));
+  var k=Object.keys(KW).filter(function(key){return KW[key].some(function(w){return t.indexOf(w)>-1})});
+  recommend(k.length?k:["قرب"],k.length?"فهمت ما تقصدونه، وهذه خطة مناسبة لكم.":"سأبدأ بما يقرّب الجميع، ويمكنكم إخباري بالمزيد.",t);
+}
+$("send").onclick=function(){ask($("q").value);$("q").value=""};
+$("q").onkeydown=function(e){if(e.key==="Enter"){$("send").click()}};
+NEEDS.forEach(function(n){var b=document.createElement("button");b.className="chip";b.textContent=n[0];b.onclick=function(){add("me",n[0]);recommend([n[1]],"حسنًا، لنعمل على: "+n[0]+".",n[0])};$("need").appendChild(b)});
+add("ai","أهلًا بكم في وصال 👋<br>اختاروا ما يشبه حال أسرتكم من الأسفل، أو اكتبوه بكلماتكم.");
+/* me */
+function dayKey(t){var d=new Date(t);return d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate()}
+function renderProg(){
+  var L=S.log||[],g=S.goal||3,now=Date.now(),DAY=864e5,days={};
+  L.forEach(function(x){days[dayKey(x.ts)]=1});
+  var wk=L.filter(function(x){return now-x.ts<7*DAY}).length,wp=Math.min(100,Math.round(wk/g*100));
+  var st=0,i=days[dayKey(now)]?0:1;while(days[dayKey(now-i*DAY)]){st++;i++}
+  var avg=L.length?L.reduce(function(a,x){return a+x.r},0)/L.length:0,cl=Math.round(avg/3*100);
+  var cats=C.map(function(c){return c.cat}).filter(function(v,j,a){return a.indexOf(v)===j});
+  var cv=cats.map(function(k){var all=C.filter(function(c){return c.cat===k}),dn=all.filter(function(c){return S.done.indexOf(c.id)>-1});return{k:k,n:dn.length,t:all.length}});
+  var cols='';
+  for(var j=6;j>=0;j--){var t=now-j*DAY,n=L.filter(function(x){return dayKey(x.ts)===dayKey(t)}).length;cols+=`<div class='col'><i style='height:${4+n*22}px'></i><small>${'حنثرخجس'.charAt(new Date(t).getDay())}</small></div>`}
+  var B=[['🌱','أول تحدٍّ',S.done.length>=1],['🔥','3 أيام متتالية',st>=3],['🏅','100 نقطة',pts()>=100],['🧭','جرّبتم كل الفئات',cv.every(function(x){return x.n>0})],['💞','قرب عالٍ',L.length>=3&&avg>=2.5]];
+  $('stats').innerHTML=`<div class='card'><b>كود الأسرة</b>${S.code?`<div class='code' style='font-size:1.6rem;padding:8px'>${S.code}</div><div style='text-align:center'><div class='qr' id='qrp'></div></div><button class='btn alt' id='cp'>نسخ الكود</button> <button class='btn alt' id='cpl'>نسخ رابط الدعوة</button>`:`<p class='mt'>${S.demo?'الكود ورمز QR يظهران للأسر الحقيقية عند التسجيل.':'لم يُنشأ كود لأسرتكم بعد.'}</p>${S.demo?'':`<button class='btn' id='mk'>أنشئوا كود الأسرة</button>`}`}</div><div class='card'><b>هدف هذا الأسبوع</b><div class='row2'><span>أنجزنا ${wk} من</span><select id='goal' aria-label='الهدف الأسبوعي'>${[1,2,3,4,5,6,7].map(function(v){return `<option${v===g?' selected':''}>${v}</option>`}).join('')}</select><span>تحديات</span></div><div class='bar'><i style='width:${wp}%'></i></div><p class='mt'>${wp>=100?'حققتم هدف الأسبوع، أحسنتم! 🎉':'بقي '+(g-wk)+' للوصول إلى هدفكم'}</p></div><div class='grid3'><div class='card k'><b>${pts()}</b><small>نقطة</small></div><div class='card k'><b>${st}</b><small>يوم متتالٍ</small></div><div class='card k'><b>${L.length?cl+'%':'—'}</b><small>مؤشر القرب</small></div></div><div class='card'><b>نشاط آخر 7 أيام</b><div class='bars'>${cols}</div></div><div class='card'><b>المهارات التي تنمّونها</b>${cv.map(function(x){return `<div class='sk'><span>${x.k}</span><div class='bar'><i style='width:${x.n/x.t*100}%'></i></div><small>${x.n}/${x.t}</small></div>`}).join('')}</div><div class='card'><b>أوسمة الأسرة</b><div class='badges'>${B.map(function(x){return `<div class='bd${x[2]?'':' off'}'><span>${x[0]}</span><small>${x[1]}</small></div>`}).join('')}</div></div><div class='card'><b>قراءة وصّال لتقدّمكم</b><p id='aisum' class='mt'>${L.length?'اطلبوا من وصّال قراءة سريعة لما أنجزتموه.':'أنجزوا أول تحدٍّ ليبدأ وصّال بقراءة تقدّمكم.'}</p>${L.length&&SM?`<button class='btn alt' id='aibtn'>اقرؤوا تقدّمنا</button>`:''}</div>`;
+  if($('cp'))$('cp').onclick=function(){copy(S.code)};
+  if($('qrp'))qr($('qrp'),S.code);if($('cpl'))$('cpl').onclick=function(){copy(PAGE+'#'+S.code)};
+  if($('mk'))$('mk').onclick=function(){makeCode(function(c){S.code=c;S.me=S.me||(S.mem[0]&&S.mem[0].n)||'';save();watch();renderProg()})};
+  $('goal').onchange=function(){S.goal=+this.value;save();renderProg()};
+  if($('aibtn'))$('aibtn').onclick=function(){
+    var b=this;b.disabled=true;$('aisum').textContent='وصّال يقرأ…';
+    var data={family:S.fam,members:S.mem,weeklyDone:wk,weeklyGoal:g,streakDays:st,points:pts(),closenessPct:cl,skills:cv};
+    SM('أنت «وصّال»، مساعد أسري دافئ. هذه بيانات تقدّم أسرة في تحديات التقارب: '+JSON.stringify(data)+'. اكتب 3 إلى 4 جمل بالعربية: اثنِ على إنجاز محدد، وأشر إلى المهارة الأقل تقدّمًا، واقترح خطوة واحدة للأسبوع القادم. بلا نصائح علاجية وبلا أرقام مختلقة.').then(function(r){$('aisum').textContent=r.text}).catch(function(){$('aisum').textContent='تعذّرت القراءة الآن، حاولوا لاحقًا.'}).then(function(){b.disabled=false});
+  };
+}
+function renderMe(){
+  renderProg();
+  $("fm").innerHTML="";
+  S.mem.forEach(function(m){var d=document.createElement("div");d.className="mem card";d.innerHTML='<div class="av">'+(m.r==="أب"?"👨":m.r==="أم"?"👩":m.r==="ابن"?"👦":m.r==="ابنة"?"👧":m.r==="جدّ"?"👴":"👵")+'</div><div><b>'+m.n+'</b><br><small style="color:var(--mute)">'+m.r+(m.a?" · "+m.a+" سنة":"")+" · "+(S.log||[]).filter(function(x){return x.u===m.n}).length+" إنجازات"+'</small></div>';$("fm").appendChild(d)});
+}
+$("reset").onclick=function(){if(unsub){unsub();unsub=null}S={fam:"",mem:[],done:[],cat:"الكل"};syncC();lsSave();$("fam").value="";$("members").innerHTML="";memRow({});memRow({});show("reg")};
+document.querySelectorAll("nav button").forEach(function(b){b.onclick=function(){show(b.dataset.go)}});
+load();
+(S.cu||[]).forEach(function(c){C.push(c)});
+if(S.fam){$("fam").value=S.fam;S.mem.forEach(memRow)}else{memRow({r:"أب"});memRow({r:"أم"});memRow({r:"ابن"})}
+function hashLogin(){var h=(location.hash||"").slice(1).toUpperCase();if(h==="DEMO"&&!S.demo){startDemo();return}if(/^WS-[A-Z0-9]{6}$/.test(h)&&S.code!==h){$("code").value=h;$("lerr").textContent="";$("l1").style.display="";$("l2").style.display="none";show("login")}}
+hashLogin();addEventListener("hashchange",hashLogin);
+</script>
+</body>
+</html>
